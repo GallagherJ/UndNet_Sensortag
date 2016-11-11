@@ -1,0 +1,23 @@
+{
+  "name": "volume",
+  "version": "0.0.1",
+  "description": "BLE (Bluetooth low energy) Volume Service",
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.10"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "author": "Don Coleman",
+  "dependencies": {
+    "bleno": "~0.1.10",
+    "keypress": "0.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
+}
