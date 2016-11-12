@@ -4,10 +4,60 @@ var socket = io.connect('http://localhost:8080/');
 //array of peripheral objects
 var peripheralsList = [];
 
+
+//Tonejs Markov
+
+// function loadScript(url, callback){
+
+//     var script = document.createElement("script")
+//     script.type = "text/javascript";
+
+//     if (script.readyState){  //IE
+//         script.onreadystatechange = function(){
+//             if (script.readyState == "loaded" ||
+//                     script.readyState == "complete"){
+//                 script.onreadystatechange = null;
+//                 callback();
+//             }
+//         };
+//     } else {  //Others
+//         script.onload = function(){
+//             callback();
+//         };
+//     }
+
+//     script.src = url;
+//     document.getElementsByTagName("head")[0].appendChild(script);
+// };
+
+// loadScript("http://cdn.tonejs.org/latest/Tone.min.js", function(){
+//     //initialization code
+
+//     var chain = new Tone.CtrlMarkov({
+//     "1" : ["c"],
+//     "2" :["h"],
+//     "3":["a"],
+//     "4":["i"],
+//     "5":["n"]
+
+// });
+//     chain.value = "1";
+//     chain.next();
+//     console.log(chain);
+// });
+
+
+
+
+
+
+
+
+
 //when connect
 socket.on('connect', function() {
 	console.log("Connected");
-}
+
 });
 
 // when receive a message
@@ -19,7 +69,7 @@ socket.on('peripheral', function(data) {
 	}
 
     
-	document.getElementById('found').innerHTML ="Peripherals found - click to explore:";
+	document.getElementById('found').innerHTML ="Your Word is here!!";
 
     var newPeripheral = true;
 
@@ -29,6 +79,19 @@ socket.on('peripheral', function(data) {
     	}
     });
 
+
+
+    //random text
+var words = ["A", "P", "P", "L", "E"];
+
+var getRandomWord = function () {
+    return words[Math.floor(Math.random() * words.length)];
+};
+
+var word = getRandomWord();
+
+console.log(word);
+
     // Taking only Sensor Tag
     if(newPeripheral && data.name == "SensorTag"){
 	//display in HTML
@@ -36,21 +99,15 @@ socket.on('peripheral', function(data) {
 	Pdiv.className= 'peripheralDiv btn';
 	Pdiv.setAttribute('id', data.uuid);
 	var Pname = document.createElement('p');
-	Pname.innerHTML = data.name+'<br/><span> UUID: '+data.uuid+'</span>';
+	Pname.innerHTML = word//data.name+'<br/><span> UUID: '+data.uuid+'</span>'+ word;
     console.log(data);
 
 
-    var sensortag = getOwnProperty(data);
+ 
 
-function getOwnProperty(peripheral.Object){
-        console.log(peripheral);
-    };
-    
-    // var SensorTag = require('sensortag');  
-    // SensorTag.discover(function listen(){
-    //     console.log(tag.on('simpleKeyChange'));
 
-    // })   
+
+
 
 	//attach event listener to the peripheral divs
 	Pdiv.addEventListener("click", explore);
@@ -119,6 +176,15 @@ function explore(){
 
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 function requestScan(){
