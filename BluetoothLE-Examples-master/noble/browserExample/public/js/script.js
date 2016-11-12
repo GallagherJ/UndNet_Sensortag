@@ -5,55 +5,6 @@ var socket = io.connect('http://localhost:8080/');
 var peripheralsList = [];
 
 
-//Tonejs Markov
-
-// function loadScript(url, callback){
-
-//     var script = document.createElement("script")
-//     script.type = "text/javascript";
-
-//     if (script.readyState){  //IE
-//         script.onreadystatechange = function(){
-//             if (script.readyState == "loaded" ||
-//                     script.readyState == "complete"){
-//                 script.onreadystatechange = null;
-//                 callback();
-//             }
-//         };
-//     } else {  //Others
-//         script.onload = function(){
-//             callback();
-//         };
-//     }
-
-//     script.src = url;
-//     document.getElementsByTagName("head")[0].appendChild(script);
-// };
-
-// loadScript("http://cdn.tonejs.org/latest/Tone.min.js", function(){
-//     //initialization code
-
-//     var chain = new Tone.CtrlMarkov({
-//     "1" : ["c"],
-//     "2" :["h"],
-//     "3":["a"],
-//     "4":["i"],
-//     "5":["n"]
-
-// });
-//     chain.value = "1";
-//     chain.next();
-//     console.log(chain);
-// });
-
-
-
-
-
-
-
-
-
 //when connect
 socket.on('connect', function() {
 	console.log("Connected");
@@ -85,7 +36,8 @@ socket.on('peripheral', function(data) {
 var words = ["A", "P", "P", "L", "E"];
 
 var getRandomWord = function () {
-    return words[Math.floor(Math.random() * words.length)];
+    i = Math.floor(Math.random() * words.length);
+    return words[i];
 };
 
 var word = getRandomWord();
